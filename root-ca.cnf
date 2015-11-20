@@ -1,0 +1,52 @@
+dir = .
+
+[ ca ]
+default_ca					= root_ca
+
+[ root_ca ]
+serial						= $dir/root-ca/serial
+database					= $dir/root-ca/index.txt
+new_certs_dir				= $dir/root-ca/certs
+certificate					= $dir/root-ca/root-ca-cert.pem
+private_key					= $dir/root-ca/private/root-ca-key.pem
+default_days				= 1825
+default_md					= sha1
+preserve					= no
+email_in_dn					= no
+nameopt						= default_ca
+certopt						= default_ca
+policy						= root_ca_policy
+default_crl_days			= 365
+x509_extensions				= root_ca_extensions
+copy_extensions				= copy
+
+[ root_ca_policy ]
+countryName					= supplied
+stateOrProvinceName			= optional
+organizationName			= supplied
+organizationalUnitName		= optional
+commonName					= supplied
+emailAddress				= optional
+
+[ req ]
+default_bits				= 4096
+default_keyfile				= $dir/root-ca/private/root-ca-key.pem
+default_md					= sha1
+input_password				= Pass1234
+output_password				= Pass1234
+prompt						= no
+distinguished_name			= root_ca_distinguished_name
+x509_extensions				= root_ca_extensions
+
+[ root_ca_distinguished_name ]
+commonName					= Local Domain Certificate Authority
+countryName					= SG
+emailAddress				= root@localdomain
+organizationName			= Local Domain
+0.organizationalUnitName	= Local Machine
+
+[ root_ca_extensions ]
+basicConstraints			= CA:true
+subjectKeyIdentifier		= hash
+authorityKeyIdentifier		= keyid:always,issuer:always
+

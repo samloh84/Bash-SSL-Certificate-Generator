@@ -1,0 +1,26 @@
+dir = .
+
+[ req ]
+default_bits				= 4096
+default_keyfile				= $dir/root-ca/private/root-ca-key.pem
+default_md					= sha1
+input_password				= Pass1234
+output_password				= Pass1234
+prompt						= no
+distinguished_name			= certificate_distinguished_name
+x509_extensions				= certificate_extensions
+
+[ certificate_distinguished_name ]
+commonName					= Local Machine Certificate
+countryName					= SG
+emailAddress				= root@localdomain
+organizationName			= Local Domain
+0.organizationalUnitName	= Local Machine
+
+[ certificate_extensions ]
+basicConstraints			= CA:false
+subjectKeyIdentifier		= hash
+subjectAltName          = @alt_names
+
+[ alt_names ]
+DNS.0                   = localdomain
